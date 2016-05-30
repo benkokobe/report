@@ -23,7 +23,7 @@
 				<div class="col-lg-8 col-lg-offset-2">
 					<h2>View/Download source code</h2>
 					<p>The source code can be found on GitHub</p>
-					<a href="https://github.com/benkokobe/transfer-report-ui" target="_blank"
+					<a href="https://github.com/benkokobe/report/" target="_blank"
 						class="btn btn-default btn-lg">Visit the GitHub Repo</a>
 				</div>
 			</div>
