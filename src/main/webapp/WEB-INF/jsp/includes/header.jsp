@@ -12,10 +12,10 @@
 
 	<!-- Bootstrap -->
 	<link href="/public/lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/public/lib/bootstrap-3.1.1/css/custom.css" rel="stylesheet">
 	
-	<link href="/public/lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<!-- <link href="/public/lib/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet"> -->
 	
-
 </head>
 <body>
 	<div class="container">
@@ -23,7 +23,7 @@
 	<b><p class="text-right">Connected to:${env_name}</p></b>
 	<b><p class="text-left">RIC: Build Manager Tool</p></b>
 	
-	<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-inverse navbar-custom" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 	    <div class="navbar-header">
@@ -38,7 +38,8 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="/">Release Content</a></li>
+	        <!--  <li class="active"><a href="/">Release Content</a></li>-->
+	        <li><a href="/">Release Content</a></li>
 	        <li><a href="/under_con">DB member type</a></li>
 	        <li><a href="/under_con">Impact of Release</a></li>
 	      </ul>

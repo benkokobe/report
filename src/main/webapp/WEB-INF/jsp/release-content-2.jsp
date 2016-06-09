@@ -1,5 +1,79 @@
 <%@include file="includes/header.jsp"%>
 
+    <!--  Google Chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    if ('${releaseManager.numberOfLinkedDr}' == 0){
+    	google.charts.load('current', {'packages':['bar']});
+    }else{
+    	google.charts.load('current', {'packages':['corechart']});
+    }
+      
+      google.charts.setOnLoadCallback(drawVisualization);
+
+
+      function drawVisualization() {
+        
+    	if ('${releaseManager.numberOfLinkedDr}' == 0){
+    		var data = google.visualization.arrayToDataTable([
+    		                   ['Deployment Request', '# of patches', '# of TFT operations', '# of manual op.'],
+    		                   ['${releaseManager.releaseName}', '${releaseManager.singleDeploymentRequest.numberOfPatches}', 
+    		                   '${releaseManager.singleDeploymentRequest.numberOfTransferOperations}',
+    		                   '${releaseManager.singleDeploymentRequest.numberOfManualTransferOperations}']
+    		                   ]);
+    		var options = {
+    		          chart: {
+    		            title: '${releaseManager.releaseName}',
+    		            subtitle: '${releaseManager.synopsisOfRelease}',
+    		          }
+    		        };
+    		var chart = new google.charts.Bar(document.getElementById('chart_div'));
+        }else{
+			
+			  var data = new google.visualization.DataTable();
+		       data.addColumn('string', 'Month'); // Implicit domain column.
+		       data.addColumn('number', '# of patches'); // Implicit data column.
+		       data.addColumn('number', '# of TFT op.');
+		       data.addColumn('number', '# of manual op.');
+		       
+		       var numberofLinkedDR= parseInt('${releaseManager.numberOfLinkedDr}');
+		       
+		       data.addRows(numberofLinkedDR);
+		       
+		       //var deploymentRequestsList = ${releaseManager.linkedDeploymentRequest};
+		       
+		       i= 0;
+               <c:forEach items="${releaseManager.linkedDeploymentRequest}" var="deploymentRequest">
+	               
+	               nbrPatches = parseInt('${deploymentRequest.numberOfPatches}');
+	               nbrOfTFTOp = parseInt('${deploymentRequest.numberOfTransferOperations}');
+	               nbrManualOp = parseInt('${deploymentRequest.numberOfManualTransferOperations}');
+		    	   
+	               data.setCell(i,0, '${deploymentRequest.drName}');
+	               data.setCell(i,1, nbrPatches);
+		    	   data.setCell(i,2,nbrOfTFTOp);
+		    	   data.setCell(i,3,nbrManualOp);
+		    	   i++;
+		       
+		       </c:forEach>		       
+
+        	 var options = {
+        		      title : '${releaseManager.releaseName}:${releaseManager.synopsisOfRelease} ',
+        		      vAxis: {title: 'Number of'},
+        		      hAxis: {title: 'Deployment Requests'},
+        		      seriesType: 'bars',
+        		      //series: {5: {type: 'line'}}
+        		    };
+        	 var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+			 //var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        }
+        
+    
+    chart.draw(data, options);
+    }
+    </script>
+    <!--  Google chart -->
+
 <div class="jumbotron">
 
 <table class="table">
@@ -66,9 +140,11 @@
 		</c:otherwise>
 	</c:choose></td>
 </tr>
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+<br>
 <div class="row">
 	<div class="col-md-8">
-			<a class="btn btn-default" href="${releaseManager.releaseName}.xls?releaseName=${releaseManager.releaseName}" role="button">Generate Excel</a>
+			<a class="btn btn-primary" href="${releaseManager.releaseName}.xls?releaseName=${releaseManager.releaseName}" role="button">Generate Excel</a>
 	</div>
 </div>
 </div>

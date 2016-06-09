@@ -1,34 +1,38 @@
 <%@include file="includes/header.jsp"%>
 
-<div class="jumbotron">
-	<!-- About Section -->
-	<section id="about" class="container content-section text-center">
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2">
-				<h2>About Build Manager Tool</h2>
-				<p>
-					This is a tool that helps RIC team member to have an automatic overview of the release that he will be executing
-				</p>
-				<p>
-					It also generates a detailed content of a release. This is a work in progress ...
-				</p>
-			</div>
-		</div>
-	</section>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
 
-	<!-- Download Section -->
-	<section id="download" class="content-section text-center">
-		<div class="download-section">
-			<div class="container">
-				<div class="col-lg-8 col-lg-offset-2">
-					<h2>View/Download source code</h2>
-					<p>The source code can be found on GitHub</p>
-					<a href="https://github.com/benkokobe/report/" target="_blank"
-						class="btn btn-default btn-lg">Visit the GitHub Repo</a>
-				</div>
-			</div>
-		</div>
-	</section>
-</div>
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+         ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+         ['2004/05',  165,      938,         522,             998,           450,      614.6],
+         ['2005/06',  135,      1120,        599,             1268,          288,      682],
+         ['2006/07',  157,      1167,        587,             807,           397,      623],
+         ['2007/08',  139,      1110,        615,             968,           215,      609.4],
+         ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+      ]);
+
+    var options = {
+      title : 'Monthly Coffee Production by Country',
+      vAxis: {title: 'Cups'},
+      hAxis: {title: 'Month'},
+      seriesType: 'bars',
+      series: {5: {type: 'line'}}
+    };
+
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+  </body>
 
 <%@include file="includes/footer.jsp"%>
