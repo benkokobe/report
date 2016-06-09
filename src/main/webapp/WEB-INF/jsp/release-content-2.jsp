@@ -40,8 +40,6 @@
 		       
 		       data.addRows(numberofLinkedDR);
 		       
-		       //var deploymentRequestsList = ${releaseManager.linkedDeploymentRequest};
-		       
 		       i= 0;
                <c:forEach items="${releaseManager.linkedDeploymentRequest}" var="deploymentRequest">
 	               
