@@ -29,7 +29,7 @@
     		        };
     		var chart = new google.charts.Bar(document.getElementById('chart_div'));
         }else{
-			
+        			
 			  var data = new google.visualization.DataTable();
 		       data.addColumn('string', 'Month'); // Implicit domain column.
 		       data.addColumn('number', '# of patches'); // Implicit data column.

@@ -40,7 +40,7 @@
 	      <ul class="nav navbar-nav">
 	        <!--  <li class="active"><a href="/">Release Content</a></li>-->
 	        <li><a href="/">Release Content</a></li>
-	        <li><a href="/under_con">DB member type</a></li>
+	        <li><a href="/member">DB member SQL</a></li>
 	        <li><a href="/under_con">Impact of Release</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
