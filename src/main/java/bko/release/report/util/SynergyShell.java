@@ -36,7 +36,7 @@ public class SynergyShell {
 	private Properties config;
 	private Session    session;
 	private Channel channel;
-	private ChannelExec channel_exec;
+	protected ChannelExec channel_exec;
 	
 	private List<SynergyObject>  synergyObjects;
 	private List<Patch>    patchList;
@@ -295,7 +295,7 @@ public class SynergyShell {
 	}
 
 	//public static void main(String[] arg) throws IOException, JSchException {
-	public void main(String[] arg) throws IOException, JSchException {
+	public void main2(String[] arg) throws IOException, JSchException {
 		
 		
 

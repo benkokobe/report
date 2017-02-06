@@ -90,5 +90,9 @@ public class DeploymentRequestServiceImpl implements DeploymentRequestService{
 	public String getSynopsis(String deploymentRequestName) {
 		return this.deploymentRequestDao.getSynopsis(deploymentRequestName);
 	}
+	
+	public String getLastDrExecuted(){
+		return this.deploymentRequestDao.getLastDrExecuted();
+	}
 
 }

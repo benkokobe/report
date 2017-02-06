@@ -1,3 +1,5 @@
 /target/
 /bin/
 /.apt_generated/
+DR-REPORT/*
+.*

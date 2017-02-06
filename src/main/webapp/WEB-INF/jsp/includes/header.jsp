@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"   prefix="fn" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,7 @@
 	<div class="container">
 	
 	<b><p class="text-right">Connected to:${env_name}</p></b>
-	<b><p class="text-left">RIC: Build Manager Tool</p></b>
+	<b><p class="text-left">Build Manager Tool</p></b>
 	
 	<nav class="navbar navbar-inverse navbar-custom" role="navigation">
 	  <div class="container-fluid">
@@ -41,7 +42,8 @@
 	        <!--  <li class="active"><a href="/">Release Content</a></li>-->
 	        <li><a href="/">Release Content</a></li>
 	        <li><a href="/member">DB member SQL</a></li>
-	        <li><a href="/under_con">Impact of Release</a></li>
+	        <li><a href="/release_checker">Last DR executed</a></li>
+	        <li><a href="/under_con">Impact of a Release</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a href="/about">About</a></li>

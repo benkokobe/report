@@ -22,5 +22,7 @@ public interface DeploymentRequestService {
 	public String getEnvDst(String deploymentRequestName);
 	public String getEnvSrc(String deploymentRequestName);
 	public String getSynopsis(String deploymentRequestName);
+	
+	public String getLastDrExecuted();
 
 }

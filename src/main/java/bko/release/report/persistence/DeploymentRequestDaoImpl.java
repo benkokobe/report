@@ -262,5 +262,55 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 			return "WARNING: Empty enventory table";
 		}	
 	}
+	
+	//last DR executed
+	public String getLastDrExecuted(){
+		
+		logger.info("getTransferOperation");
+		try {
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			//select * from yfd05 where datcrt = (select MAX(datcrt) from yfd05)
+			String query = "select namlot from yfd05 where datcrt = (select MAX(datcrt) from yfd05)";
+			
+			//String lastDRExecuted = jdbcTemplate.getSimpleJdbcTemplate().query(query);
+			String lastDRExecuted;
+			lastDRExecuted = jdbcTemplate.queryForObject(query, params, String.class);
+			
+			return lastDRExecuted;
+			
+		} catch (DataAccessException exc) {
+			logger.error("FAILED to get transfer op. List " + exc);
+			return "FAILED";
+		}
+
+	}
+	// last n DR executed
+public List<String> getLastNDrExecuted(int n){
+		
+		logger.info("getTransferOperation");
+		StringBuilder builder = new StringBuilder();
+		List<String> lastNDRExecuted = null;
+		try {
+			MapSqlParameterSource params = new MapSqlParameterSource();
+			params.addValue("lastn", n);
+			//select * from yfd05 where datcrt = (select MAX(datcrt) from yfd05)
+			builder.append("SELECT namlot FROM (select * from yfd05 where stalot = '8800' ORDER BY datmaj DESC) yf");
+			builder.append("WHERE rownum <= :lastn  ORDER BY rownum ASC");
+			String query = builder.toString();
+			
+			
+			//String lastDRExecuted = jdbcTemplate.getSimpleJdbcTemplate().query(query);
+			
+			lastNDRExecuted = jdbcTemplate.queryForList(query, params, String.class);
+			
+			return lastNDRExecuted;
+			
+		} catch (DataAccessException exc) {
+			logger.error("FAILED to get transfer op. List " + exc);
+			return lastNDRExecuted;//FIXME watch out when this is returned
+		}
+
+	}
+	
 
 }
