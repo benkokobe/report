@@ -1,38 +1,18 @@
 <%@include file="includes/header.jsp"%>
 
-  <head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
+<div class="jumbotron">
+	<div class="panel-group">
+		<div class="panel panel-primary">
+			<div class="panel-heading">This tool does the following:</div>
+			<div class="panel-body">
+				<ul>
+					<li>Generates complete release content: patch list, TFT op. DB members, Synergy objects, DB member types impacted and more.</li>
+					<li>Last DR that is executed and all companies/environments in which it's installed</li>
+					<li>DB member SQL</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</div>
 
-
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-         ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-         ['2004/05',  165,      938,         522,             998,           450,      614.6],
-         ['2005/06',  135,      1120,        599,             1268,          288,      682],
-         ['2006/07',  157,      1167,        587,             807,           397,      623],
-         ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-         ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-      ]);
-
-    var options = {
-      title : 'Monthly Coffee Production by Country',
-      vAxis: {title: 'Cups'},
-      hAxis: {title: 'Month'},
-      seriesType: 'bars',
-      series: {5: {type: 'line'}}
-    };
-
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
-    </script>
-  </head>
-  <body>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
-  </body>
-
-<%@include file="includes/footer.jsp"%>
+	<%@include file="includes/footer.jsp"%>

@@ -73,7 +73,19 @@
     <!--  Google chart -->
 
 <div class="jumbotron">
-
+<div class="panel-group">
+<div class="panel panel-primary">  
+    <div class = "panel-heading">Here below an overview of the release.</div>
+    <div class="panel panel-info">
+				<div class="panel-heading">
+    <div class="row">
+	<div class="col-md-8">
+			<a class="btn btn-primary" href="${releaseManager.releaseName}.xls?releaseName=${releaseManager.releaseName}" role="button">Generate Excel</a>
+	</div>
+    </div>
+    </div>
+    </div>
+ <div class = "panel-body"> 
 <table class="table">
   <thead class="thead-inverse">
     <tr>
@@ -138,12 +150,14 @@
 		</c:otherwise>
 	</c:choose></td>
 </tr>
+</div> 
+</div>
+<div class="panel panel-info">
+  <div class = "panel-heading">
+      An overview of the release using Charts.
+  </div>
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
-<br>
-<div class="row">
-	<div class="col-md-8">
-			<a class="btn btn-primary" href="${releaseManager.releaseName}.xls?releaseName=${releaseManager.releaseName}" role="button">Generate Excel</a>
-	</div>
+</div>
 </div>
 </div>
 <%@include file="includes/footer.jsp"%>

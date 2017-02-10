@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -119,7 +122,13 @@ public class SynergyShellReleaseReport extends SynergyShell {
 		List<String> listOfDestinations = patch.getListOfDestinationEnv(); // control list of destinations
 		
 		//remove duplicates
-		listOfDestinations = listOfDestinations.stream().distinct().collect(Collectors.toList());
+		//listOfDestinations = listOfDestinations.stream().distinct().collect(Collectors.toList());//Java 8
+		
+		//remove duplicate work-around if Java 8 not used.
+		Set<String> hs = new HashSet<>();
+		hs.addAll(listOfDestinations);
+		listOfDestinations.clear();
+		listOfDestinations.addAll(hs);
 		
 		//System.out.println("Size of the control list:" + nmbOfDestinations);
 		

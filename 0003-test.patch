@@ -1,0 +1,25 @@
+From 04101bb348f927395f264e80a60ee16304399cd7 Mon Sep 17 00:00:00 2001
+From: unknown <ben.kokobe@gmail.com>
+Date: Thu, 9 Jun 2016 23:07:32 +0200
+Subject: [PATCH 3/3] test
+
+---
+ src/main/webapp/WEB-INF/jsp/release-content-2.jsp | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/main/webapp/WEB-INF/jsp/release-content-2.jsp b/src/main/webapp/WEB-INF/jsp/release-content-2.jsp
+index ab7c653..773adf8 100644
+--- a/src/main/webapp/WEB-INF/jsp/release-content-2.jsp
++++ b/src/main/webapp/WEB-INF/jsp/release-content-2.jsp
+@@ -40,8 +40,6 @@
+ 		       
+ 		       data.addRows(numberofLinkedDR);
+ 		       
+-		       //var deploymentRequestsList = ${releaseManager.linkedDeploymentRequest};
+-		       
+ 		       i= 0;
+                <c:forEach items="${releaseManager.linkedDeploymentRequest}" var="deploymentRequest">
+ 	               
+-- 
+2.6.0.windows.1
+

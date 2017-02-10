@@ -2,7 +2,12 @@
 
 
 <div class="jumbotron">
-  <h2>DB member Name.</h2>
+<div class="panel-group">
+<div class="panel panel-primary">
+  <div class = "panel-heading">
+        Enter DB member name <i>[Member Name, GROUP, TYPE, COMPANY]</i>
+    </div> 
+    <div class = "panel-body">
   <!-- <form class="form-horizontal" role="form"> -->
   <form:form class="form-horizontal"  method="post" modelAttribute="member_description">
     <div class="form-group">
@@ -33,5 +38,8 @@
     </div>
   <!-- </form> -->
   </form:form>
+</div>
+</div>
+</div>
 </div>
 <%@include file="includes/footer.jsp"%>

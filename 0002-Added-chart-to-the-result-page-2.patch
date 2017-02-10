@@ -1,0 +1,37 @@
+From 7f7977c83ee266e15d8d043d18f1fc464ce2068e Mon Sep 17 00:00:00 2001
+From: unknown <ben.kokobe@gmail.com>
+Date: Thu, 9 Jun 2016 22:46:03 +0200
+Subject: [PATCH 2/3] Added chart to the result page - 2
+
+---
+ .../release-report/target/m2e-wtp/web-resources/.gitignore        | 1 +
+ .../resources/static/public/lib/bootstrap-3.1.1/css/custom.css    | 8 ++++++++
+ 2 files changed, 9 insertions(+)
+ create mode 100644 Users/bkokobe/Documents/Programming/source-repo/git-hub/release-report/release-report/target/m2e-wtp/web-resources/.gitignore
+ create mode 100644 src/main/resources/static/public/lib/bootstrap-3.1.1/css/custom.css
+
+diff --git a/Users/bkokobe/Documents/Programming/source-repo/git-hub/release-report/release-report/target/m2e-wtp/web-resources/.gitignore b/Users/bkokobe/Documents/Programming/source-repo/git-hub/release-report/release-report/target/m2e-wtp/web-resources/.gitignore
+new file mode 100644
+index 0000000..3385916
+--- /dev/null
++++ b/Users/bkokobe/Documents/Programming/source-repo/git-hub/release-report/release-report/target/m2e-wtp/web-resources/.gitignore
+@@ -0,0 +1 @@
++/META-INF/
+diff --git a/src/main/resources/static/public/lib/bootstrap-3.1.1/css/custom.css b/src/main/resources/static/public/lib/bootstrap-3.1.1/css/custom.css
+new file mode 100644
+index 0000000..ca595ad
+--- /dev/null
++++ b/src/main/resources/static/public/lib/bootstrap-3.1.1/css/custom.css
+@@ -0,0 +1,8 @@
++.navbar-custom {
++    color: #880000;
++    background-color: #880000;
++}
++.jumbotron
++{
++background-color:#B0B0B0;
++}
+\ No newline at end of file
+-- 
+2.6.0.windows.1
+
