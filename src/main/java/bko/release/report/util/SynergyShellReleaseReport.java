@@ -8,8 +8,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +33,8 @@ public class SynergyShellReleaseReport extends SynergyShell {
 	}
 
 	public List<ReleasePatch> getListOfPatches(String drName) throws JSchException, IOException{
+		
+		List<ReleasePatch> patchList = new ArrayList<ReleasePatch>();
 		String query = "ccm query \"problem_type='patch' and is_associated_patch_of(dr_name = '"
 				+ drName
 				+ "'"
@@ -42,8 +42,8 @@ public class SynergyShellReleaseReport extends SynergyShell {
 				+ "-u -f \"%reference\"";
 		
 		sessionConnectAndExecCommand(query);
+			
 		BufferedReader reader = new BufferedReader(new InputStreamReader(channel_exec.getInputStream()));
-		List<ReleasePatch> patchList = new ArrayList<ReleasePatch>();
 		
 	    String line;
 	    ReleasePatch releasePatch;

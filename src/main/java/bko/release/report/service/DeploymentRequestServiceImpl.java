@@ -94,5 +94,8 @@ public class DeploymentRequestServiceImpl implements DeploymentRequestService{
 	public String getLastDrExecuted(){
 		return this.deploymentRequestDao.getLastDrExecuted();
 	}
+	public List<String> getLastNDrExecuted(int n){
+		return this.deploymentRequestDao.getLastNDrExecuted(n);
+	}
 
 }

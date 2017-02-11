@@ -24,5 +24,6 @@ public interface DeploymentRequestService {
 	public String getSynopsis(String deploymentRequestName);
 	
 	public String getLastDrExecuted();
+	public List<String> getLastNDrExecuted(int n);
 
 }

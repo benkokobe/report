@@ -8,7 +8,7 @@ public class ReleaseDR {
 	
 	private String drName;
 	private List<ReleasePatch> releasePatchList;
-	private List<String> listOfDestinations;
+	private List<String> listOfDestinations;//FIXME: A DR has only one destination!!
 	
 	/*
 	 * getters and setters

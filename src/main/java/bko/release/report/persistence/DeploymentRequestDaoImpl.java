@@ -41,13 +41,13 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("NAMLOT", NAMLOT);
 
-			//String sql = "SELECT REFPAT FROM YSW11 WHERE SYNDPR  = (SELECT SYNDPR FROM YSW10 WHERE NOMDPR = :NAMLOT)";
+			// String sql = "SELECT REFPAT FROM YSW11 WHERE SYNDPR = (SELECT
+			// SYNDPR FROM YSW10 WHERE NOMDPR = :NAMLOT)";
 			String sql = "SELECT refmai FROM yfd06 WHERE reflot  = (select reflot from yfd05 where namlot =:NAMLOT)";
 
 			logger.info("SQL getPatchList: " + ":" + NAMLOT + ":" + sql);
 
-			List<Patch> patches = jdbcTemplate.query(sql, params,
-					new PatchListRowMapper());
+			List<Patch> patches = jdbcTemplate.query(sql, params, new PatchListRowMapper());
 			return patches;
 
 		} catch (DataAccessException exc) {
@@ -64,17 +64,19 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("NOMDPR", drName);
 			StringBuilder builder = new StringBuilder();
-			//builder.append(" select refpat, nommbr, typmbr, typact from ypd02_syn where refpat in ( ");
+			// builder.append(" select refpat, nommbr, typmbr, typact from
+			// ypd02_syn where refpat in ( ");
 			builder.append(" select refmai, nommbr, typmbr, typact from yed02 where refmai in ( ");
-			builder.append(" SELECT refmai FROM yfd06 WHERE reflot  = (select reflot from yfd05 where namlot =:NOMDPR))");
-			//builder.append(" select syndpr from ysw10 where nomdpr =:NOMDPR ) )");
+			builder.append(
+					" SELECT refmai FROM yfd06 WHERE reflot  = (select reflot from yfd05 where namlot =:NOMDPR))");
+			// builder.append(" select syndpr from ysw10 where nomdpr =:NOMDPR )
+			// )");
 			builder.append(" order by refmai ");
 
 			String query = builder.toString();
 			logger.info("SQL get DRmembers:" + query);
 
-			List<PatchMember> drMembers = jdbcTemplate.query(query, params,
-					new PatchMembersListRowMapper());
+			List<PatchMember> drMembers = jdbcTemplate.query(query, params, new PatchMembersListRowMapper());
 
 			return drMembers;
 		} catch (DataAccessException exc) {
@@ -88,12 +90,13 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("NAMLOT", deploymentRequestName);
-		//String query = "select count(*) FROM YSW11 WHERE SYNDPR  = (SELECT SYNDPR FROM YSW10 WHERE NOMDPR = :NAMLOT)";
+		// String query = "select count(*) FROM YSW11 WHERE SYNDPR = (SELECT
+		// SYNDPR FROM YSW10 WHERE NOMDPR = :NAMLOT)";
 		String query = "select count(*) FROM yfd06 WHERE reflot  = (select reflot from yfd05 where namlot =:NAMLOT)";
 
 		// return jdbcTemplate.queryForInt(query, params); --> deprecated so use
 		// queryForObject
-		int numberOfPatches= jdbcTemplate.queryForObject(query, params, Integer.class);
+		int numberOfPatches = jdbcTemplate.queryForObject(query, params, Integer.class);
 		logger.info("No. of patches:" + numberOfPatches);
 		return numberOfPatches;
 	}
@@ -106,8 +109,8 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 			params.addValue("NAMLOT", NAMLOT);
 			String query = "select * from yfd07 where reflot = (select reflot from yfd05 where namlot =:NAMLOT)";
 
-			List<DeploymentRequestTransferOperation> transferOperationList = jdbcTemplate.query(
-					query, params, new TransferOperationsRowMapper());
+			List<DeploymentRequestTransferOperation> transferOperationList = jdbcTemplate.query(query, params,
+					new TransferOperationsRowMapper());
 			return transferOperationList;
 		} catch (DataAccessException exc) {
 			logger.error("FAILED to get transfer op. List " + exc);
@@ -117,8 +120,7 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 
 	public class TransferOperationsRowMapper implements RowMapper {
 
-		public DeploymentRequestTransferOperation mapRow(ResultSet rs, int rowNum)
-				throws SQLException {
+		public DeploymentRequestTransferOperation mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// I use JDK 5 so I do not have to wrap int with an Integer object
 			DeploymentRequestTransferOperation transferOperation = new DeploymentRequestTransferOperation();
 			transferOperation.setIttcmd(rs.getString("ITTCMD"));
@@ -135,7 +137,7 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 			transferOperation.setVernum(rs.getString("VERNUM"));
 			transferOperation.setSwimlt(rs.getString("SWIMLT"));
 			transferOperation.setNomgrp(rs.getString("NOMGRP"));
-			//transferOperation.setIdtent(rs.getString("IDTENT"));
+			// transferOperation.setIdtent(rs.getString("IDTENT"));
 			transferOperation.setIttcmd(rs.getString("ITTCMD"));
 			return transferOperation;
 		}
@@ -177,7 +179,7 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 		public PatchMember mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// I use JDK 5 so I do not have to wrap int with an Integer object
 			PatchMember patchMember = new PatchMember();
-			//patchMember.setPatchId(rs.getString("REFPAT"));
+			// patchMember.setPatchId(rs.getString("REFPAT"));
 			patchMember.setPatchId(rs.getString("REFMAI"));
 			patchMember.setPatchMember(rs.getString("NOMMBR"));
 			patchMember.setMemberType(rs.getString("TYPMBR"));
@@ -196,121 +198,134 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 
 		// return jdbcTemplate.queryForInt(query, params); --> deprecated so use
 		// queryForObject
-		int numberOfTransferOp= jdbcTemplate.queryForObject(query, params, Integer.class);
+		int numberOfTransferOp = jdbcTemplate.queryForObject(query, params, Integer.class);
 		logger.info("No. of transfer operations:" + numberOfTransferOp);
 		return numberOfTransferOp;
 	}
-	public int getNumberOfManualTransferOperations(String deploymentRequestName){
+
+	public int getNumberOfManualTransferOperations(String deploymentRequestName) {
 		logger.info("getNumberOfManualTransferOperations");
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("NAMLOT", deploymentRequestName);
 		String query = "select count(*) from yfd07 where reflot = (select reflot from yfd05 where namlot =:NAMLOT) and swiman = 'Y'";
-		int numberOfManualTransferOp= jdbcTemplate.queryForObject(query, params, Integer.class);
+		int numberOfManualTransferOp = jdbcTemplate.queryForObject(query, params, Integer.class);
 		logger.info("No. of transfer operations:" + numberOfManualTransferOp);
 		return numberOfManualTransferOp;
-		
+
 	}
-	public int getNumberOfSubjects(String deploymentRequestName){
+
+	public int getNumberOfSubjects(String deploymentRequestName) {
 		logger.info("getNumberOfSubjects");
-		
+
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("NAMLOT", deploymentRequestName);
-		//String query = "select count(distinct sujpat) from ypd01_syn where refpat in (select refpat from ysw11 where syndpr = (select syndpr from ysw10 where nomdpr=:NAMLOT))";
+		// String query = "select count(distinct sujpat) from ypd01_syn where
+		// refpat in (select refpat from ysw11 where syndpr = (select syndpr
+		// from ysw10 where nomdpr=:NAMLOT))";
 		String query = "select count(distinct sujpat) from ysw12 where refpat in (select refpat from ysw11 where syndpr = (select syndpr from ysw10 where nomdpr=:NAMLOT))";
 		try {
-		  int numberOfSubjects= jdbcTemplate.queryForObject(query, params, Integer.class);
-		  logger.info("No. of numberOfSubjects:" + numberOfSubjects);
-		  return numberOfSubjects;
+			int numberOfSubjects = jdbcTemplate.queryForObject(query, params, Integer.class);
+			logger.info("No. of numberOfSubjects:" + numberOfSubjects);
+			return numberOfSubjects;
 		} catch (EmptyResultDataAccessException e) {
-			return -1; // TODO until a good way return an error/warning is devised 
+			return -1; // TODO until a good way return an error/warning is
+						// devised
 		}
 	}
-	public String getEnvDst(String deploymentRequestName){
+
+	public String getEnvDst(String deploymentRequestName) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("NAMLOT", deploymentRequestName);
 		String query = "select envdst from ysw10 where nomdpr=:NAMLOT";
 		try {
-		   String envDst= jdbcTemplate.queryForObject(query, params, String.class);
-		   logger.info("DR destination environment:" + envDst);
-		   return envDst;
+			String envDst = jdbcTemplate.queryForObject(query, params, String.class);
+			logger.info("DR destination environment:" + envDst);
+			return envDst;
 		} catch (EmptyResultDataAccessException e) {
 			return "WARNING: Empty enventory table";
 		}
 	}
-	public String getEnvSrc(String deploymentRequestName){
+
+	public String getEnvSrc(String deploymentRequestName) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("NAMLOT", deploymentRequestName);
 		String query = "select envsrc from ysw10 where nomdpr=:NAMLOT";
 		try {
-		   String envSrc= jdbcTemplate.queryForObject(query, params, String.class);
-		   logger.info("DR source environment:" + envSrc);
-		   return envSrc;
+			String envSrc = jdbcTemplate.queryForObject(query, params, String.class);
+			logger.info("DR source environment:" + envSrc);
+			return envSrc;
 		} catch (EmptyResultDataAccessException e) {
 			return "WARNING: Empty enventory table";
 		}
 	}
-	public String getSynopsis(String deploymentRequestName){
+
+	public String getSynopsis(String deploymentRequestName) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("NAMLOT", deploymentRequestName);
 		String query = "select ittdpr from ysw10 where nomdpr=:NAMLOT";
-		try{
-		    String ittdpr= jdbcTemplate.queryForObject(query, params, String.class);
-		
-		    logger.info("DR synopsis:" + ittdpr);
-		    return ittdpr;
+		try {
+			String ittdpr = jdbcTemplate.queryForObject(query, params, String.class);
+
+			logger.info("DR synopsis:" + ittdpr);
+			return ittdpr;
 		} catch (EmptyResultDataAccessException e) {
 			return "WARNING: Empty enventory table";
-		}	
+		}
 	}
-	
-	//last DR executed
-	public String getLastDrExecuted(){
-		
+
+	// last DR executed
+	public String getLastDrExecuted() {
+
 		logger.info("getTransferOperation");
 		try {
 			MapSqlParameterSource params = new MapSqlParameterSource();
-			//select * from yfd05 where datcrt = (select MAX(datcrt) from yfd05)
+			// select * from yfd05 where datcrt = (select MAX(datcrt) from
+			// yfd05)
 			String query = "select namlot from yfd05 where datcrt = (select MAX(datcrt) from yfd05)";
-			
-			//String lastDRExecuted = jdbcTemplate.getSimpleJdbcTemplate().query(query);
+
+			// String lastDRExecuted =
+			// jdbcTemplate.getSimpleJdbcTemplate().query(query);
 			String lastDRExecuted;
 			lastDRExecuted = jdbcTemplate.queryForObject(query, params, String.class);
-			
+
 			return lastDRExecuted;
-			
+
 		} catch (DataAccessException exc) {
 			logger.error("FAILED to get transfer op. List " + exc);
 			return "FAILED";
 		}
 
 	}
-	// last n DR executed
-public List<String> getLastNDrExecuted(int n){
-		
+
+	/**
+	 * MODIF-1
+	 */
+	public List<String> getLastNDrExecuted(int n) {
+
 		logger.info("getTransferOperation");
 		StringBuilder builder = new StringBuilder();
 		List<String> lastNDRExecuted = null;
 		try {
 			MapSqlParameterSource params = new MapSqlParameterSource();
 			params.addValue("lastn", n);
-			//select * from yfd05 where datcrt = (select MAX(datcrt) from yfd05)
+			// select * from yfd05 where datcrt = (select MAX(datcrt) from
+			// yfd05)
 			builder.append("SELECT namlot FROM (select * from yfd05 where stalot = '8800' ORDER BY datmaj DESC) yf");
 			builder.append("WHERE rownum <= :lastn  ORDER BY rownum ASC");
 			String query = builder.toString();
-			
-			
-			//String lastDRExecuted = jdbcTemplate.getSimpleJdbcTemplate().query(query);
-			
+
+			// String lastDRExecuted =
+			// jdbcTemplate.getSimpleJdbcTemplate().query(query);
+
 			lastNDRExecuted = jdbcTemplate.queryForList(query, params, String.class);
-			
+
 			return lastNDRExecuted;
-			
+
 		} catch (DataAccessException exc) {
 			logger.error("FAILED to get transfer op. List " + exc);
-			return lastNDRExecuted;//FIXME watch out when this is returned
+			return lastNDRExecuted;// FIXME watch out when this is returned
 		}
 
 	}
-	
 
 }

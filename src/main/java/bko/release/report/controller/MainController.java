@@ -37,6 +37,13 @@ public class MainController extends BaseController{
 		model.addAttribute("releaseManager", this.releaseManager);
 		model.addAttribute("env_name", env_name);
 		
+		if (this.shell.checkSynergySession() != 0){
+			logger.error("Please start the Synergy session of the user: " + host_login);
+			model.addAttribute("host_login",host_login);
+			return "synergy-error-page";
+			
+		}
+		
 		
 		logger.info("env_name:" + env_name);
 		return "release-content-1";
