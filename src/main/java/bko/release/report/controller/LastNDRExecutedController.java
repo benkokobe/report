@@ -18,61 +18,74 @@ import com.jcraft.jsch.JSchException;
 
 import bko.release.report.domain.ReleaseDR;
 import bko.release.report.service.DeploymentRequestService;
+import bko.release.report.util.LastNDRExecutedManager;
 import bko.release.report.util.ReleaseCheckerManager;
 import bko.release.report.util.ReleaseManager;
 import bko.release.report.util.SynergyShellReleaseReport;
 
 @Controller
-@RequestMapping(value = "/last_ndr")
+@RequestMapping(value = "/last_ndr_executed")
 public class LastNDRExecutedController  extends BaseController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(LastNDRExecutedController.class);
 	@Resource
 	private DeploymentRequestService deploymentRequestService;
 	
-	protected ReleaseCheckerManager releaseCheckManager;
+	protected LastNDRExecutedManager lastNDRExecuted;
 	protected SynergyShellReleaseReport checkerShell;
+	protected List <String> listOfLastNDRExecuted;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(Model model) throws JSchException, IOException {
-		super.initialize_release();
 		
-		model.addAttribute("releaseManager", this.releaseManager);
+		initialize();
+		//super.initialize_release();
+		
+		//FIXME: hadcoded value
+		int lastN = 5;
+		
+		this.listOfLastNDRExecuted = getLastNDrExecuted(lastN);
+		
+		if (this.checkerShell.checkSynergySession() != 0){
+			logger.error("Please start the Synergy session of the user: " + host_login);
+			model.addAttribute("host_login",host_login);
+			return "synergy-error-page";
+			
+		}
+		
 		model.addAttribute("env_name", env_name);
-		
+		model.addAttribute("listOfLastNDRExecuted",listOfLastNDRExecuted);
 		
 		logger.info("env_name:" + env_name);
-		return "release-content-1";
+		return "last_ndr_executed";
 		
 	}
 	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public String submitForm(@ModelAttribute("releaseManager") ReleaseManager releaseManager,
-//			BindingResult result, Model model) throws JSchException, IOException {
-//
-//		int lastN = 5;//FIXME
-//		initialize();
-//		//super.releaseManager.initialize(drName, shell, deploymentRequestService);
-//		
-//		model.addAttribute("env_name", env_name);
-//		model.addAttribute("releaseCheckManager", this.releaseCheckManager);
-//		
-//		List<String> lastNDR= getLastNDrExecuted(lastN);
-//		
-//		model.addAttribute("lastNDrExecuted",lastNDR);
-//		
-//		this.releaseCheckManager.initialize_checker(lastDR, this.checkerShell);
-//		
-//		ReleaseDR releaseDr = this.releaseCheckManager.getReleaseDR();
-//		releaseCheckManager.setReleaseDR(releaseDr);
-//		
-//		logger.info("env_name:" + env_name);
-//		return "release-checker-1";
-//	}
+	@RequestMapping(method = RequestMethod.POST)
+	public String submitForm(@ModelAttribute("lastNDRExecuted") LastNDRExecutedManager lastNDRExecuted,
+			BindingResult result, Model model) throws JSchException, IOException {
+
+		logger.info("[ 1] submitForm: lastNDRExecuted.initialize_checker(this.listOfLastNDRExecuted, this.checkerShell)");
+		
+		this.lastNDRExecuted.initialize_checker(this.listOfLastNDRExecuted, this.checkerShell);
+		
+
+		List<ReleaseDR> listOfDRExecuted = this.lastNDRExecuted.getListOfNDRexecuted();
+		lastNDRExecuted.setListOfNDRexecuted(listOfDRExecuted);
+		
+		// for JSP
+		model.addAttribute("env_name", env_name);
+		model.addAttribute("listOfLastNDRExecuted",listOfLastNDRExecuted);
+		model.addAttribute("lastNDRExecuted", this.lastNDRExecuted);
+		
+
+
+		return "last_ndr_executed-2";
+	}
 	
 	public void initialize() throws JSchException {
 
-		this.releaseCheckManager = new ReleaseCheckerManager();
+		this.lastNDRExecuted = new LastNDRExecutedManager();
 		this.checkerShell = new SynergyShellReleaseReport();
 
 		if (this.host_password.length() != 0)

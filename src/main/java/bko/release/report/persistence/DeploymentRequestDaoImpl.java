@@ -310,7 +310,7 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 			params.addValue("lastn", n);
 			// select * from yfd05 where datcrt = (select MAX(datcrt) from
 			// yfd05)
-			builder.append("SELECT namlot FROM (select * from yfd05 where stalot = '8800' ORDER BY datmaj DESC) yf");
+			builder.append("SELECT namlot FROM (select * from yfd05 where stalot = '8800' ORDER BY datmaj DESC) yf ");
 			builder.append("WHERE rownum <= :lastn  ORDER BY rownum ASC");
 			String query = builder.toString();
 

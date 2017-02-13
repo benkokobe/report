@@ -42,6 +42,12 @@
          <td scope="row">${destination}</td>
     </tr>
    </c:if>
+   <c:if test="${fn:containsIgnoreCase(destination, 'VTB')}">
+      <tr>
+         <td>VTB</td>
+         <td scope="row">${destination}</td>
+    </tr>
+   </c:if>
    <c:if test="${fn:containsIgnoreCase(destination, 'EWU')}">
       <tr>
          <td>EWUB</td>

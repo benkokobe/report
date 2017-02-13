@@ -78,9 +78,15 @@ public class SynergyShellReleaseReport extends SynergyShell {
 	    
 	    while ((line = reader.readLine()) != null) {
 	    	String[] tokens = line.split("\\|");
-	    	logger.info(("token: "+ tokens.toString()));
-	    	listOfDrs.add(tokens[0]);
-	    	listOfDestEnv.add(tokens[1]);
+	    	int size = tokens.length;
+	    	if (size < 2){
+	    		logger.error("Issue with return of the query: " + query);
+	    		logger.error("Returned line is              : " + line);
+	    	}else {
+	    		logger.info("token of : " + line);
+		    	listOfDrs.add(tokens[0]);
+		    	listOfDestEnv.add(tokens[1]);
+	    	}
 	    }
     	releasePatch.setListOfDR(listOfDrs);
     	releasePatch.setListOfDestinationEnv(listOfDestEnv);

@@ -23,7 +23,7 @@ import bko.release.report.util.SynergyShell;
 import bko.release.report.util.SynergyShellReleaseReport;
 
 @Controller
-@RequestMapping(value = "/release_checker")
+@RequestMapping(value = "/last_dr_executed")
 public class ReleaseDRCheckerController extends BaseController{
 	private static final Logger logger = LoggerFactory.getLogger(ReleaseDRCheckerController.class);
 	
