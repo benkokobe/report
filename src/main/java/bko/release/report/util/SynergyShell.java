@@ -95,6 +95,13 @@ public class SynergyShell {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(channel_exec.getInputStream()));
 		String line;
 
+
+		line = reader.readLine();
+		while ((line = reader.readLine()) != null) {
+			if (line.toString().contains("No sessions found")) {
+				return 1;
+			}
+		}
 		int exit_status = channel_exec.getExitStatus();//FIXME  better handling of Synergy connection issues
 		if ( exit_status == -1){ //-1 is status code until SHH is closed
 			logger.info("Synergy session OK");
@@ -103,12 +110,6 @@ public class SynergyShell {
 		if ( exit_status > 0){ //FIXME  better handling of Synergy connection issues
 			logger.error("Issue with ccm command!!: " + exit_status);//usually due to "Cannot connect to router"
 			return 1;
-		}
-		line = reader.readLine();
-		while ((line = reader.readLine()) != null) {
-			if (line.toString().contains("No sessions found")) {
-				return 1;
-			}
 		}
 		logger.info("Synergy session OK.");
 		return 0;

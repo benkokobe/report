@@ -50,6 +50,12 @@
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
+							<c:if test="${fn:containsIgnoreCase(destination, 'WELL')}">
+								<tr>
+									<td>WELL ( ABN ) </td>
+									<td scope="row">${destination}</td>
+								</tr>
+							</c:if>
 							</c:forEach>
 							</tbody>
 							</table>
