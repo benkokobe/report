@@ -103,10 +103,10 @@ public class SynergyShell {
 			}
 		}
 		int exit_status = channel_exec.getExitStatus();//FIXME  better handling of Synergy connection issues
-		if ( exit_status == -1){ //-1 is status code until SHH is closed
-			logger.info("Synergy session OK");
-			return 0;
-		}
+//		if ( exit_status == -1){ //-1 is status code until SHH is closed
+//			logger.info("Synergy session OK");
+//			return 0;
+//		}
 		if ( exit_status > 0){ //FIXME  better handling of Synergy connection issues
 			logger.error("Issue with ccm command!!: " + exit_status);//usually due to "Cannot connect to router"
 			return 1;

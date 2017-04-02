@@ -287,23 +287,25 @@ public class BaseReleaseExcelGenerator {
 		 * this.summaryTab.getRow(1).getCell(i)); }
 		 */
 		log.info("Tab name   :" + this.summaryTab.getSheetName());
-		log.info("Dr name    : " + this.summaryTab.getRow(8).getCell(2));
-		log.info("Synopsis   : " + this.summaryTab.getRow(1).getCell(2));
-		log.info("From       : " + this.summaryTab.getRow(1).getCell(5));
-		log.info("To         : " + this.summaryTab.getRow(1).getCell(7));
+		log.info("Dr name    : " + this.summaryTab.getRow(2).getCell(1));
+		log.info("Synopsis   : " + this.summaryTab.getRow(3).getCell(1));
+		log.info("From       : " + this.summaryTab.getRow(4).getCell(1));
+		log.info("To         : " + this.summaryTab.getRow(5).getCell(1));
 
 		// this.deploymentRequestService.getSynopsis(this.drName);
 
-		this.summaryTab.getRow(8).getCell(2).setCellValue(this.releaseManager.getReleaseName());
-		this.summaryTab.getRow(1).getCell(2).setCellValue(this.releaseManager.getSynopsisOfRelease());
-		this.summaryTab.getRow(1).getCell(5).setCellValue(this.releaseManager.getSourceEnvironment());
-		this.summaryTab.getRow(1).getCell(7).setCellValue(this.releaseManager.getDestinationEnvironment());
+		this.summaryTab.getRow(1).getCell(1).setCellValue(this.releaseManager.getReleaseName());
+		this.summaryTab.getRow(2).getCell(1).setCellValue(this.releaseManager.getSynopsisOfRelease());
+		this.summaryTab.getRow(3).getCell(1).setCellValue(this.releaseManager.getSourceEnvironment());
+		this.summaryTab.getRow(4).getCell(1).setCellValue(this.releaseManager.getDestinationEnvironment());
+		this.summaryTab.getRow(5).getCell(1).setCellValue(this.releaseManager.getNumberOfLinkedDr());
+		
 
 		log.info("Release name         : " + this.releaseManager.getReleaseName());
 		log.info("Dest. name           : " + this.releaseManager.getDestinationEnvironment());
 
-		for (int i = 0; i < 20; i++) {
-			log.info("row:" + i + ":" + this.summaryTab.getRow(i).getCell(2));
+		for (int i = 1; i < 6; i++) {
+			log.info("row:" + i + ":" + this.summaryTab.getRow(i).getCell(1));
 		}
 	}
 
