@@ -4,7 +4,7 @@
 <div class="panel-group">
 <div class="panel panel-primary">  
     <div class = "panel-heading">
-        Last DR executed is: <strong><blink>${lastDrExecuted}</blink></strong>. It's installed in the following environments.
+        Last DR executed is: <strong><blink>${lastDrExecuted}: ${releaseCheckManager.releaseDR.synopsis}</blink></strong>. It's installed in the following environments.
     </div>
   
  <div class="table-responsive">

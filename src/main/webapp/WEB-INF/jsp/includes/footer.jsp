@@ -1,7 +1,7 @@
 
 <footer>
 	<div class="container text-center">
-		<p>&copy; BKO tools 2016</p>
+		<p>&copy; RIC B&D tools 2016</p>
 	</div>
 </footer>
 </div>

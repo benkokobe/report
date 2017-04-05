@@ -66,6 +66,8 @@ public class ReleaseCheckerManager extends ReleaseManager{
 		
 		List<ReleasePatch> releasePatchList = this.synergyShell.getListOfPatches(drName);
 		this.releaseDR.setReleasePatchList(releasePatchList);
+		String synopsis = this.synergyShell.getDRSynopsis(drName);
+		this.releaseDR.setSynopsis(synopsis);
 		
 		if (this.synergyShell.sanity_check()){
 			//List<String> listOfDestinations = this.releaseDR.getListOfDestinations();

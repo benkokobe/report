@@ -48,6 +48,8 @@ private static final Logger log = LoggerFactory.getLogger(LastNDRExecutedManager
 			releaseDr = new ReleaseDR();
 			releaseDr.setDrName(dr);
 			this.synergyShell.fillReleaseDR(dr);
+			String synopsis = this.synergyShell.getDRSynopsis(dr);
+			releaseDr.setSynopsis(synopsis);
 			List<ReleasePatch> releasePatchList = this.synergyShell.getListOfPatches(dr);
 			releaseDr.setReleasePatchList(releasePatchList);
 			

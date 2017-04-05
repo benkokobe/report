@@ -4,7 +4,7 @@
 <div class="panel-group">
 	<div class="panel panel-primary">
 		<c:forEach var="release_dr" items="${lastNDRExecuted.listOfNDRexecuted}">
-			<div class="panel-heading">${release_dr.drName}</div>
+			<div class="panel-heading">${release_dr.drName}:     ${release_dr.synopsis}</div>
 						<table class="table table-striped">
 							<thead>
 								<tr>

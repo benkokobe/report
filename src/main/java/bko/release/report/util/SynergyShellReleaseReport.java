@@ -32,6 +32,21 @@ public class SynergyShellReleaseReport extends SynergyShell {
 		this.releaseDR = releaseDR;
 	}
 
+	public String getDRSynopsis(String drName) throws JSchException, IOException{
+		
+		String query = "ccm query \"dr_name = '" 
+				+ drName 
+				+ "'"
+				+ "\" "
+				+ "-u -f \"%problem_synopsis\"";
+		sessionConnectAndExecCommand(query);
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(channel_exec.getInputStream()));
+		String line;
+		line = reader.readLine();
+		System.out.println("Destination: " + line.toString());
+		return line.toString();
+	}
 	public List<ReleasePatch> getListOfPatches(String drName) throws JSchException, IOException{
 		
 		List<ReleasePatch> patchList = new ArrayList<ReleasePatch>();
@@ -171,10 +186,11 @@ public class SynergyShellReleaseReport extends SynergyShell {
 			String pass = "bko";
 			shell.intialize_and_connect("scm.com.saas.i2s", "bkokobe", key, pass);
 			//shell.execute_command(query);
-			String drName = "PACK-PRG-0071";
+			String drName = "PACK-PRG-0087";
 			List<ReleasePatch> patchList;
 			//patchList = shell.getListOfPatches(drName);
 			
+			shell.getDRSynopsis(drName);
 			shell.fillReleaseDR(drName);
 			
 			ReleaseDR releaseDr = shell.getReleaseDR();

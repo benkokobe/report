@@ -7,12 +7,20 @@ import org.springframework.stereotype.Component;
 public class ReleaseDR {
 	
 	private String drName;
+	private String synopsis;
+	
 	private List<ReleasePatch> releasePatchList;
 	private List<String> listOfDestinations;//FIXME: A DR has only one destination!!
 	
 	/*
 	 * getters and setters
 	 */
+	public String getSynopsis() {
+		return synopsis;
+	}
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
 	public List<String> getListOfDestinations() {
 		return listOfDestinations;
 	}
