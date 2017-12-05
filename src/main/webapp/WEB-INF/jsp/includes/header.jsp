@@ -43,7 +43,7 @@
 	        <li><a href="/">Release Content</a></li>
 	        <li><a href="/member">DB member SQL</a></li>
 	        <li><a href="/last_dr_executed">Last DR executed</a></li>
-	        <li><a href="/last_ndr_executed">Last 5 DRs executed</a></li>
+	        <li><a href="/last_ndr_executed">Last 10 DRs executed</a></li>
 	        <li><a href="/under_con">Impact of a Release</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">

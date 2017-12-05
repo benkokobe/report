@@ -292,7 +292,7 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 
 		} catch (DataAccessException exc) {
 			logger.error("FAILED to get transfer op. List " + exc);
-			return "FAILED";
+			return "FAILED: select namlot from yfd05 where datcrt = (select MAX(datcrt) from yfd05)";
 		}
 
 	}

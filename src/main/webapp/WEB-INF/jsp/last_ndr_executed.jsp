@@ -3,7 +3,7 @@
 <div class="jumbotron">
 	<div class="panel-group">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Here below the last 5 DR's executed!</div>
+			<div class="panel-heading">Here below the last 10 DR's executed!</div>
 			    <table class="table table-striped">
 			      <thead>
 			         <tr>

@@ -20,27 +20,27 @@
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
-							<c:if test="${fn:containsIgnoreCase(destination, 'EVI')}">
+							<c:if test="${fn:containsIgnoreCase(destination, 'ACP')}">
 								<tr>
-									<td>EVI</td>
+									<td>SI2</td>
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
-							<c:if test="${fn:containsIgnoreCase(destination, 'NIB')}">
+							<c:if test="${fn:containsIgnoreCase(destination, 'TST')}">
 								<tr>
-									<td>NIBC</td>
+									<td>AC5</td>
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
-							<c:if test="${fn:containsIgnoreCase(destination, 'SANT')}">
+							<c:if test="${fn:containsIgnoreCase(destination, 'MIG')}">
 								<tr>
-									<td>SANTANDER</td>
+									<td>MIG</td>
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
-							<c:if test="${fn:containsIgnoreCase(destination, 'EWU')}">
+							<c:if test="${fn:containsIgnoreCase(destination, 'DVL')}">
 								<tr>
-									<td>EWUB</td>
+									<td>DVL</td>
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
