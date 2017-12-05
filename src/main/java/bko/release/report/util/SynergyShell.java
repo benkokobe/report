@@ -211,6 +211,7 @@ public class SynergyShell {
 
 			String[] tokens = line.split("\\|");
 
+			System.out.print("ccm query :" + query);
 			System.out.print("Source Env:" + tokens[0]);
 			System.out.print("Destination Env:" + tokens[1]);
 			System.out.println("Synopsis:" + tokens[2]);
@@ -253,6 +254,10 @@ public class SynergyShell {
 			patch = new Patch();
 			String[] tokens = line.split("\\|");
 
+			if (tokens.length< 4) {
+				System.out.println("Issue with line read --> " + tokens.toString());
+				return this.patchList;
+			}
 			patch.setPatchId(tokens[0]);
 			patch.setNomGrp(tokens[1]);
 			patch.setSujPat(tokens[2]);

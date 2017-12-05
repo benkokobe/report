@@ -415,6 +415,10 @@ public class BaseReleaseExcelGenerator {
 					columnObjectListInstance.setCellValue(synObject.getInstance());
 
 					rowCounter++;
+					if (rowCounter > 32766 ) {
+						log.info("outside allowable range !!!!");
+						return;
+					}
 				}
 			}
 			

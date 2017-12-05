@@ -222,7 +222,7 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 		// String query = "select count(distinct sujpat) from ypd01_syn where
 		// refpat in (select refpat from ysw11 where syndpr = (select syndpr
 		// from ysw10 where nomdpr=:NAMLOT))";
-		String query = "select count(distinct sujpat) from ysw12 where refpat in (select refpat from ysw11 where syndpr = (select syndpr from ysw10 where nomdpr=:NAMLOT))";
+		String query = "select count(distinct sujpat) from ysw12 where refpat in (select refpat from ysw11 where syndpr = (select syndpr from ysw10 where nomdpr=:NAMLOT and  ROWNUM = 1))";
 		try {
 			int numberOfSubjects = jdbcTemplate.queryForObject(query, params, Integer.class);
 			logger.info("No. of numberOfSubjects:" + numberOfSubjects);
