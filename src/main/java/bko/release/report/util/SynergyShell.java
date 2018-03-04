@@ -156,10 +156,15 @@ public class SynergyShell {
 
 		line = reader.readLine();
 		if (line == null) {
-			System.out.println("No linked DR's");
+			logger.info("No linked DR's [ null return from ccm ]");
+			return false;
+		}; 
+		
+		if ( line.length() == 0) {
+			logger.info("No linked DR's [ empty line from ccm ]");
 			return false;
 		} else {
-			System.out.println("There are linked DR's");
+			logger.info("There are linked DR's [ with no issue ]");
 			return true;
 		}
 	}
@@ -179,7 +184,7 @@ public class SynergyShell {
 			String[] tokens = line.split(" ");
 			DeploymentRequest deploymentRequest = new DeploymentRequest();
 
-			System.out.println("Linked DR name:" + tokens[0]);
+			logger.info("Linked DR name:" + tokens[0]);
 			deploymentRequest.setDrName(tokens[0]);
 
 			linkedDeploymentRequest.add(deploymentRequest);
@@ -208,12 +213,15 @@ public class SynergyShell {
 		String line;
 
 		while ((line = reader.readLine()) != null) {
+			if (line.length() < 1)
+	           	 continue;
 
 			String[] tokens = line.split("\\|");
 
-			System.out.print("Source Env:" + tokens[0]);
-			System.out.print("Destination Env:" + tokens[1]);
-			System.out.println("Synopsis:" + tokens[2]);
+			logger.info("ccm query :" + query);
+			logger.info("Source Env:" + tokens[0]);
+			logger.info("Destination Env:" + tokens[1]);
+			logger.info("Synopsis:" + tokens[2]);
 			deploymentRequest.setEnvSrc(tokens[0]);
 			deploymentRequest.setEnvDst(tokens[1]);
 			deploymentRequest.setSynopsis(tokens[2]);
@@ -222,7 +230,7 @@ public class SynergyShell {
 
 		// channel_exec.disconnect();
 
-		System.out.println("Exit code: " + channel_exec.getExitStatus());
+		logger.info("Exit code: " + channel_exec.getExitStatus());
 
 	}
 
@@ -253,6 +261,14 @@ public class SynergyShell {
 			patch = new Patch();
 			String[] tokens = line.split("\\|");
 
+			if (line.length() < 1) {
+				logger.info("Issue with line read --> " + tokens.toString());
+				continue;
+			}
+			if (tokens.length< 4) {
+				logger.info("Issue with line after tokenization  2--> " + tokens.toString());
+				return this.patchList;
+			}
 			patch.setPatchId(tokens[0]);
 			patch.setNomGrp(tokens[1]);
 			patch.setSujPat(tokens[2]);
@@ -262,10 +278,10 @@ public class SynergyShell {
 			patchList.add(patch);
 		}
 		for (Patch p : patchList) {
-			System.out.println("Object: " + p.getPatchId());
+			logger.debug("Object: " + p.getPatchId());
 		}
 
-		System.out.println("Exit code: " + channel_exec.getExitStatus());
+		logger.info("Exit code: " + channel_exec.getExitStatus());
 		return this.patchList;
 
 	}
@@ -290,7 +306,7 @@ public class SynergyShell {
 
 		String query = "ccm query \"is_associated_cv_of(is_associated_task_of(is_associated_patch_of(dr_name = '"
 				+ drName + "'" + "))) \" "
-				+ "                      -u -f \"%task|%name|%version|%type|%instance|%task_synopsis|%release";
+				+ "                      -u -f \"%task|%name|%version|%type|%instance|%task_synopsis|%release\" ";
 
 		synergyObjects = new ArrayList<SynergyObject>();
 
@@ -302,6 +318,9 @@ public class SynergyShell {
 		SynergyObject synergyObject;
 
 		while ((line = reader.readLine()) != null) {
+			if (line.length() < 1)
+	           	 continue;
+			
 			String[] tokens = line.split("\\|");
 
 			// %task, %name, %version, %type, %instance, %task_synopsis,
@@ -318,10 +337,10 @@ public class SynergyShell {
 
 		}
 		for (SynergyObject obj : synergyObjects) {
-			System.out.println("Object: " + obj.getObject());
+			logger.debug("Object: " + obj.getObject());
 		}
 
-		System.out.println("Exit code: " + channel_exec.getExitStatus());
+		logger.info("Exit code: " + channel_exec.getExitStatus());
 		return this.synergyObjects;
 
 	}

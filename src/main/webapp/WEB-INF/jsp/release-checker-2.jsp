@@ -17,36 +17,59 @@
   </thead>
  <tbody>
 <c:forEach var="destination" items="${releaseCheckManager.releaseDR.listOfDestinations}">
-
-   <c:if test="${fn:containsIgnoreCase(destination, 'BLD')}">
+<c:if test="${fn:containsIgnoreCase(destination, 'BLD')}">
       <tr>
          <td>Build Environment</td>
          <td scope="row">${destination}</td>
     </tr>
    </c:if>
-   <c:if test="${fn:containsIgnoreCase(destination, 'EVI')}">
+   <c:if test="${fn:containsIgnoreCase(destination, 'BAP')}">
       <tr>
-         <td>EVI</td>
+         <td>Build Environment</td>
          <td scope="row">${destination}</td>
     </tr>
    </c:if>
-   <c:if test="${fn:containsIgnoreCase(destination, 'NIB')}">
+   <c:if test="${fn:containsIgnoreCase(destination, 'TST')}">
       <tr>
-         <td>NIBC</td>
+         <td>AC5</td>
          <td scope="row">${destination}</td>
     </tr>
    </c:if>
-   <c:if test="${fn:containsIgnoreCase(destination, 'SANT')}">
+   <c:if test="${fn:containsIgnoreCase(destination, 'ACP')}">
       <tr>
-         <td>SANTANDER</td>
+         <td>SI2</td>
          <td scope="row">${destination}</td>
     </tr>
    </c:if>
-   <c:if test="${fn:containsIgnoreCase(destination, 'EWU')}">
+   <c:if test="${fn:containsIgnoreCase(destination, 'MIG')}">
       <tr>
-         <td>EWUB</td>
+         <td>MIG</td>
          <td scope="row">${destination}</td>
     </tr>
+   </c:if>
+   <c:if test="${fn:containsIgnoreCase(destination, 'ACC')}">
+      <tr>
+         <td>ACC</td>
+         <td scope="row">${destination}</td>
+    </tr>
+   </c:if>
+   <c:if test="${fn:containsIgnoreCase(destination, 'SIM')}">
+      <tr>
+         <td>SIM</td>
+         <td scope="row">${destination}</td>
+    </tr>    
+   </c:if>
+   <c:if test="${fn:containsIgnoreCase(destination, 'PRD')}">
+      <tr>
+         <td>PRD</td>
+         <td scope="row">${destination}</td>
+    </tr>    
+   </c:if>
+   <c:if test="${fn:containsIgnoreCase(destination, 'DVL')}">
+      <tr>
+         <td>DVL</td>
+         <td scope="row">${destination}</td>
+    </tr>    
    </c:if>
 </c:forEach>
 </tbody>

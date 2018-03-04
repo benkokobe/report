@@ -45,6 +45,12 @@ public class ReleaseDRCheckerController extends BaseController{
 		
 		model.addAttribute("lastDrExecuted",lastDR);
 		
+		if (lastDR.contains("FAIL")) {
+			logger.error("getLastDrExecuted returns error : " + lastDR);
+			model.addAttribute("lastDR",lastDR);
+			return "SQL-error-page";
+		}
+		
 		if (this.checkerShell.checkSynergySession() != 0){
 			logger.error("Please start the Synergy session of the user: " + host_login);
 			model.addAttribute("host_login",host_login);

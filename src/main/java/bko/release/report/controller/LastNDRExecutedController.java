@@ -42,7 +42,7 @@ public class LastNDRExecutedController  extends BaseController{
 		//super.initialize_release();
 		
 		//FIXME: hadcoded value
-		int lastN = 5;
+		int lastN = 10;
 		
 		this.listOfLastNDRExecuted = getLastNDrExecuted(lastN);
 		
