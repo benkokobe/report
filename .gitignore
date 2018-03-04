@@ -5,3 +5,4 @@ DR-REPORT/*
 .*
 MY_TEMP/config.txt
 *.tmp
+.project

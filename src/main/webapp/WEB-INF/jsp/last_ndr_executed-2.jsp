@@ -1,28 +1,30 @@
 <%@include file="includes/header.jsp"%>
 
 <div class="jumbotron">
-<div class="panel-group">
-	<div class="panel panel-primary">
-		<c:forEach var="release_dr" items="${lastNDRExecuted.listOfNDRexecuted}">
-			<div class="panel-heading">${release_dr.drName}</div>
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Company</th>
-									<th>Environment</th>
-								</tr>
-							</thead>
-							<tbody>
-							<c:forEach var="destination" items="${release_dr.listOfDestinations}">
+	<div class="panel-group">
+		<div class="panel panel-primary">
+			<c:forEach var="release_dr"
+				items="${lastNDRExecuted.listOfNDRexecuted}">
+				<div class="panel-heading">${release_dr.drName}</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Company</th>
+							<th>Environment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="destination"
+							items="${release_dr.listOfDestinations}">
 							<c:if test="${fn:containsIgnoreCase(destination, 'BLD')}">
 								<tr>
 									<td>Build Environment</td>
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
-							<c:if test="${fn:containsIgnoreCase(destination, 'ACP')}">
+							<c:if test="${fn:containsIgnoreCase(destination, 'BAP')}">
 								<tr>
-									<td>SI2</td>
+									<td>Build Environment</td>
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
@@ -32,9 +34,33 @@
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
+							<c:if test="${fn:containsIgnoreCase(destination, 'ACP')}">
+								<tr>
+									<td>SI2</td>
+									<td scope="row">${destination}</td>
+								</tr>
+							</c:if>
 							<c:if test="${fn:containsIgnoreCase(destination, 'MIG')}">
 								<tr>
 									<td>MIG</td>
+									<td scope="row">${destination}</td>
+								</tr>
+							</c:if>
+							<c:if test="${fn:containsIgnoreCase(destination, 'ACC')}">
+								<tr>
+									<td>ACC</td>
+									<td scope="row">${destination}</td>
+								</tr>
+							</c:if>
+							<c:if test="${fn:containsIgnoreCase(destination, 'SIM')}">
+								<tr>
+									<td>SIM</td>
+									<td scope="row">${destination}</td>
+								</tr>
+							</c:if>
+							<c:if test="${fn:containsIgnoreCase(destination, 'PRD')}">
+								<tr>
+									<td>PRD</td>
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
@@ -44,25 +70,13 @@
 									<td scope="row">${destination}</td>
 								</tr>
 							</c:if>
-							<c:if test="${fn:containsIgnoreCase(destination, 'VTB')}">
-								<tr>
-									<td>VTB</td>
-									<td scope="row">${destination}</td>
-								</tr>
-							</c:if>
-							<c:if test="${fn:containsIgnoreCase(destination, 'WELL')}">
-								<tr>
-									<td>WELL ( ABN ) </td>
-									<td scope="row">${destination}</td>
-								</tr>
-							</c:if>
-							</c:forEach>
-							</tbody>
-							</table>
-				
+						</c:forEach>
+					</tbody>
+				</table>
 
-		</c:forEach>
-	</div>
+
+			</c:forEach>
+		</div>
 	</div>
 
 </div>
