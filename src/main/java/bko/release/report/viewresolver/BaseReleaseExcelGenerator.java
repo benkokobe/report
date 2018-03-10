@@ -396,8 +396,8 @@ public class BaseReleaseExcelGenerator {
 			for (DeploymentRequest dr : releaseManager.getLinkedDeploymentRequest()) {
 				synergyObjects = dr.getObjectList();
 				for (SynergyObject synObject : synergyObjects) {
-					log.info("****Task: " + synObject.getTask());
-					log.info("***Object: " + synObject.getObject());
+					log.debug("****Task: " + synObject.getTask());
+					log.debug("***Object: " + synObject.getObject());
 					rowObjectList = this.objectListTab.createRow((short) rowCounter);
 
 					columnObjectListDrName = rowObjectList.createCell((short) 0);
@@ -426,8 +426,8 @@ public class BaseReleaseExcelGenerator {
 			DeploymentRequest dr = releaseManager.getSingleDeploymentRequest();
 			synergyObjects = dr.getObjectList();
 			for (SynergyObject synObject : synergyObjects) {
-				log.info("****Task: " + synObject.getTask());
-				log.info("***Object: " + synObject.getObject());
+				log.debug("****Task: " + synObject.getTask());
+				log.debug("***Object: " + synObject.getObject());
 				rowObjectList = this.objectListTab.createRow((short) rowCounter);
 
 				columnObjectListDrName = rowObjectList.createCell((short) 0);

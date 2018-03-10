@@ -209,7 +209,7 @@ public class DeploymentRequestDaoImpl implements DeploymentRequestDao {
 		params.addValue("NAMLOT", deploymentRequestName);
 		String query = "select count(*) from yfd07 where reflot = (select reflot from yfd05 where namlot =:NAMLOT) and swiman = 'Y'";
 		int numberOfManualTransferOp = jdbcTemplate.queryForObject(query, params, Integer.class);
-		logger.info("No. of transfer operations:" + numberOfManualTransferOp);
+		logger.info("No. of manual transfer operations:" + numberOfManualTransferOp);
 		return numberOfManualTransferOp;
 
 	}
